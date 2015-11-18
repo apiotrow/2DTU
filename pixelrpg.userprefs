@@ -1,8 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/CharController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="../Invaders/Assets/AlienInvader.cs">
     <Files>
-      <File FileName="Assets/CharController.cs" Line="85" Column="8" />
+      <File FileName="../Invaders/Assets/AlienBullet.cs" Line="1" Column="1" />
+      <File FileName="../Invaders/Assets/game.cs" Line="1" Column="1" />
+      <File FileName="../Invaders/Assets/MenuControl.cs" Line="1" Column="1" />
+      <File FileName="../Invaders/Assets/AlienInvader.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
