@@ -267,3 +267,11 @@ Cmd: compileSnippet
   api=0 type=0 insize=5446 outsize=3768 kw=DIRECTIONAL pd= ok=1
 Cmd: compileSnippet
   api=0 type=1 insize=5446 outsize=6 kw=DIRECTIONAL pd= ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=1706 outsize=611 kw=SOFTPARTICLES_OFF pd= ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=1706 outsize=6 kw=SOFTPARTICLES_OFF pd= ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=1706 outsize=1643 kw=FOG_LINEAR SOFTPARTICLES_ON pd= ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=1706 outsize=6 kw=FOG_LINEAR SOFTPARTICLES_ON pd= ok=1
