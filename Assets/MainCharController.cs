@@ -13,7 +13,7 @@ public class MainCharController : MonoBehaviour {
 		controller = GetComponent<CharacterController>();
 		animator = GetComponent<Animator>();
 	}
-	
+
 
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.Space)) {

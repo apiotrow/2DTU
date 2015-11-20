@@ -1,8 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/SmoothFollow.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Shaders/VertexColor.shader">
     <Files>
       <File FileName="Assets/Scripts/SmoothFollow.cs" Line="36" Column="7" />
+      <File FileName="Assets/MainCharController.cs" Line="16" Column="2" />
+      <File FileName="Assets/Shaders/VertexColor.shader" Line="40" Column="35" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

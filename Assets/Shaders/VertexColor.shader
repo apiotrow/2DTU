@@ -53,6 +53,7 @@ ZTest LEqual
 				return c;
 			}
 			
+			
 			inline half4 LightingBlinnPhongEditor_PrePass (EditorSurfaceOutput s, half4 light)
 			{
 				half3 spec = light.a * s.Gloss;
