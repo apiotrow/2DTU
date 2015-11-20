@@ -47,6 +47,7 @@
   <ItemGroup>
      <Compile Include="Assets\CharController.cs" />
      <Compile Include="Assets\DragRigidBodyCSharp.cs" />
+     <Compile Include="Assets\MainCharController.cs" />
      <Compile Include="Assets\Scripts\FaceCamera.cs" />
      <Compile Include="Assets\Scripts\SmoothFollow.cs" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
