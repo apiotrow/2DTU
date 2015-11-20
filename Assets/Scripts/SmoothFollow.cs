@@ -33,12 +33,12 @@ public class SmoothFollow : MonoBehaviour
 	// Update is called once per frame
 	void LateUpdate ()
 	{
-		if(GameObject.Find("adventurer(Clone)") != null){
-			target = GameObject.Find("adventurer(Clone)").transform;
-		}
-		if(GameObject.Find("ai-test-adventurer(Clone)") != null){
-			target = GameObject.Find("ai-test-adventurer(Clone)").transform;
-		}
+//		if(GameObject.Find("adventurer(Clone)") != null){
+//			target = GameObject.Find("adventurer(Clone)").transform;
+//		}
+//		if(GameObject.Find("ai-test-adventurer(Clone)") != null){
+//			target = GameObject.Find("ai-test-adventurer(Clone)").transform;
+//		}
 
 		// Early out if we don't have a target
 		if (!target)
