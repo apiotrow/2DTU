@@ -45,6 +45,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\EnemyController.cs" />
+     <Compile Include="Assets\FT_FreeSample\Script\Button.cs" />
      <Compile Include="Assets\FX\Fx Explosion Pack\Script\DestroyEffect.cs" />
      <Compile Include="Assets\FX\Fx Explosion Pack\Script\csLightControl.cs" />
      <Compile Include="Assets\Scripts\Ahmed_ThrowClock.cs" />
@@ -53,6 +55,7 @@
      <Compile Include="Assets\Scripts\FaceCamera.cs" />
      <Compile Include="Assets\Scripts\MainCharController.cs" />
      <Compile Include="Assets\Scripts\SmoothFollow.cs" />
+     <Compile Include="Assets\WeaponCollide.cs" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />

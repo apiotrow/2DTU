@@ -3,11 +3,12 @@ using System.Collections;
 
 public class MainCharController : MonoBehaviour {
 	CharacterController controller;
+//	public GameObject weapon;
 	Animator animator;
-	float walkSpeed = 10f;
+	float walkSpeed = 20f;
 	bool u, d, l, r;
 	float xGo, yGo, zGo;
-//	bool isWalking = false;
+	public ParticleSystem[] hitEnemyParticleSystem;
 
 	void Start () {
 		controller = GetComponent<CharacterController>();
@@ -27,7 +28,7 @@ public class MainCharController : MonoBehaviour {
 		xGo = 0f;
 		yGo = 0f;
 		zGo = 0f;
-//		isWalking = false;
+
 		animator.SetBool("walking", false);
 
 		if (Input.GetKey (KeyCode.A)) {
@@ -57,5 +58,11 @@ public class MainCharController : MonoBehaviour {
 			zGo = walkSpeed;
 
 		controller.SimpleMove(new Vector3(xGo, yGo, zGo));
+	}
+
+	public void weaponHit(){
+		for(int i = 0; i < hitEnemyParticleSystem.Length; i++){
+			hitEnemyParticleSystem[i].Play ();
+		}
 	}
 }

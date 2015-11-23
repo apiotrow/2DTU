@@ -9,3 +9,23 @@ Cmd: compileSnippet
   api=0 type=0 insize=1705 outsize=888 kw=FOG_LINEAR SOFTPARTICLES_OFF pd= ok=1
 Cmd: compileSnippet
   api=0 type=1 insize=1705 outsize=6 kw=FOG_LINEAR SOFTPARTICLES_OFF pd= ok=1
+Cmd: preprocess
+  insize=1437 outsize=351 ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=1388 outsize=896 kw= pd= ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=1388 outsize=6 kw= pd= ok=1
+Cmd: preprocess
+  insize=1689 outsize=451 ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=1543 outsize=1547 kw= pd= ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=1543 outsize=6 kw= pd= ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=1470 outsize=583 kw= pd= ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=1470 outsize=6 kw= pd= ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=1470 outsize=1095 kw=FOG_LINEAR pd= ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=1470 outsize=6 kw=FOG_LINEAR pd= ok=1
