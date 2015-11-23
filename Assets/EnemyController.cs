@@ -9,48 +9,78 @@ public class EnemyController : MonoBehaviour {
 	public float walkSpeed = 20f;
 	Vector3 gotHitFlyToPos;
 	Vector3 queefingPosition;
-	public bool lerpyMovement = true;
+	bool lerpyMovement;
 	float xGo, zGo;
+	public bool queefing;
+	public bool doAQueef;
+	public float lastSecond;
 	
 	void Start () {
 		animator = this.gameObject.GetComponent<Animator>();
+		lerpyMovement = false;
+		queefing = false;
+		InvokeRepeating("shouldWeQueef", .01f, 1.0f);
 	}
 
 	void Update(){
-
+		lastSecond = 0f;
 	}
 
 	void FixedUpdate () {
+
+
+		//if not being knocked back
 		if(!gotHit){
 			queefingPosition = transform.position;
-			queefingPosition.x = player.position.x + 20f;
+			queefingPosition.x = player.position.x + 10f;
 			queefingPosition.z = player.position.z;
 
 
-			if(lerpyMovement){
-				Vector3 moveVec = queefingPosition - transform.position;
+			//if queefing, don't move
+			if(queefing == false){
+				if(lerpyMovement){
+					Vector3 moveVec = queefingPosition - transform.position;
 
-	//			this.GetComponent<CharacterController>().SimpleMove (moveVec * 100f * Time.deltaTime);
-				this.GetComponent<CharacterController>().SimpleMove (moveVec * 2f);
-			}else{
-				xGo = 0f;
-				zGo = 0f;
+		//			this.GetComponent<CharacterController>().SimpleMove (moveVec * 100f * Time.deltaTime);
+					animator.SetBool("walking", true);
+					this.GetComponent<CharacterController>().SimpleMove (moveVec * 2f);
+				}else{
+					xGo = 0f;
+					zGo = 0f;
 
-				if((queefingPosition.x - transform.position.x) > .2f)
-					xGo = walkSpeed;
-				else if((queefingPosition.x - transform.position.x) < -.2f)
-					xGo = -walkSpeed;
+					if((queefingPosition.x - transform.position.x) > .2f)
+						xGo = 1;
+					else if((queefingPosition.x - transform.position.x) < -.2f)
+						xGo = -1;
 
-				if((queefingPosition.z - transform.position.z) > .2f)
-					zGo = walkSpeed;
-				else if((queefingPosition.z - transform.position.z) < -.2f)
-					zGo = -walkSpeed;
+					if((queefingPosition.z - transform.position.z) > .2f)
+						zGo = 1;
+					else if((queefingPosition.z - transform.position.z) < -.2f)
+						zGo = -1;
 
-				this.GetComponent<CharacterController>().SimpleMove(new Vector3(xGo, transform.position.y, zGo) * 0.5f);
+					Vector3 goVec = new Vector3(xGo, transform.position.y, zGo);
+					goVec = goVec.normalized;
+					animator.SetBool("walking", true);
+					this.GetComponent<CharacterController>().SimpleMove(goVec * walkSpeed * 30f);
+				}
 			}
 
-			if((transform.position - queefingPosition).magnitude < .2f)
+			//random time-based queefing
+			if(queefing == false && doAQueef == true){
 				animator.SetTrigger("queef");
+				//				player.gameObject.GetComponent<MainCharController>().getKnockedBack();
+				queefing = true;
+				StartCoroutine("waitForAnimToStart");
+			}
+
+			//position-based queefing
+			//fucked up now won't work gotta replace time stuff with position check
+//			if(queefing == false && Mathf.Floor(Time.time) > lastSecond){
+//				animator.SetTrigger("queef");
+////				player.gameObject.GetComponent<MainCharController>().getKnockedBack();
+//				queefing = true;
+//				StartCoroutine("waitForAnimToStart");
+//			}
 		}
 
 		if(gotHit == true){
@@ -63,5 +93,31 @@ public class EnemyController : MonoBehaviour {
 	public void takeHit(){
 		gotHit = true;
 		gotHitFlyToPos = new Vector3(transform.position.x + 10f, transform.position.y, transform.position.z);
+	}
+
+	IEnumerator waitForAnimToStart(){
+		while(true){
+			if(gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("EverySize_Queef_Fast")){
+				StartCoroutine("waitForAnimToEnd");
+				yield break;
+			}
+			yield return null;
+		}
+	}
+	
+	IEnumerator waitForAnimToEnd(){
+		while(true){
+			if(!gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("EverySize_Queef_Fast")){
+				queefing = false;
+//				StartCoroutine("waitForExplosionToEnd");
+				yield break;
+			}
+			yield return null;
+		}
+	}
+
+	void shouldWeQueef(){
+		if(Random.Range(0f,1f) < 0.3f) doAQueef = true;
+		else doAQueef = false;
 	}
 }

@@ -6,7 +6,7 @@ public class MainCharController : MonoBehaviour {
 //	public GameObject weapon;
 	Animator animator;
 	float walkSpeed = 20f;
-	public float gotHitSpeed = 10f;
+	public float gotHitSpeed = 5f;
 	bool u, d, l, r;
 	float xGo, yGo, zGo;
 	public ParticleSystem[] hitEnemyParticleSystem;
