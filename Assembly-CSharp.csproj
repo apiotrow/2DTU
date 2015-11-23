@@ -47,6 +47,7 @@
   <ItemGroup>
      <Compile Include="Assets\AttackCubeEnter.cs" />
      <Compile Include="Assets\EnemyController.cs" />
+     <Compile Include="Assets\EnemyWeaponCollide.cs" />
      <Compile Include="Assets\FT_FreeSample\Script\Button.cs" />
      <Compile Include="Assets\FX\Fx Explosion Pack\Script\DestroyEffect.cs" />
      <Compile Include="Assets\FX\Fx Explosion Pack\Script\csLightControl.cs" />

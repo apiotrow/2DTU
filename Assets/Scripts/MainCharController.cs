@@ -12,6 +12,7 @@ public class MainCharController : MonoBehaviour {
 	public ParticleSystem[] hitEnemyParticleSystem;
 	bool gotHit;
 	Vector3 gotHitFlyToPos;
+	int timesHit = 0;
 
 	void Start () {
 		controller = GetComponent<CharacterController>();
@@ -27,7 +28,7 @@ public class MainCharController : MonoBehaviour {
 	}
 
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.Space)) {
+		if (Input.GetKeyDown (KeyCode.Mouse0)) {
 			animator.SetTrigger("attack");
 		}
 
@@ -79,6 +80,7 @@ public class MainCharController : MonoBehaviour {
 	}
 
 	public void getKnockedBack(){
+		print ("player: " + (++timesHit));
 		gotHit = true;
 		gotHitFlyToPos = new Vector3(transform.position.x + -20f, transform.position.y, transform.position.z);
 	}
