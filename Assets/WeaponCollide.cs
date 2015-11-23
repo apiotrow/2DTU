@@ -16,7 +16,7 @@ public class WeaponCollide : MonoBehaviour {
 	{
 		if(o.gameObject.GetComponent<EnemyController>() != null){
 			o.gameObject.GetComponent<EnemyController>().takeHit();
-			charController.weaponHit();
+			charController.performHit();
 		}
 
 	}
