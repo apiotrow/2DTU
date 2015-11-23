@@ -6,7 +6,9 @@ public class EnemyController : MonoBehaviour {
 	public bool gotHit;
 	public Transform player;
 	public float gotHitSpeed = 10f;
-	public float walkSpeed = 20f;
+	public float gotHitDistance = 10f;
+	public float walkSpeed = 40f;
+	public AttackCubeEnter attackCube;
 	Vector3 gotHitFlyToPos;
 	Vector3 queefingPosition;
 	bool lerpyMovement;
@@ -20,6 +22,7 @@ public class EnemyController : MonoBehaviour {
 		lerpyMovement = false;
 		queefing = false;
 		InvokeRepeating("shouldWeQueef", .01f, 1.0f);
+//		attackCube = transform.Find("AttackCube").gameObject.GetComponent<AttackCubeEnter>();
 	}
 
 	void Update(){
@@ -37,7 +40,7 @@ public class EnemyController : MonoBehaviour {
 
 
 			//if queefing, don't move
-			if(queefing == false){
+//			if(queefing == false){
 				if(lerpyMovement){
 					Vector3 moveVec = queefingPosition - transform.position;
 
@@ -61,13 +64,13 @@ public class EnemyController : MonoBehaviour {
 					Vector3 goVec = new Vector3(xGo, transform.position.y, zGo);
 					goVec = goVec.normalized;
 					animator.SetBool("walking", true);
-					this.GetComponent<CharacterController>().SimpleMove(goVec * walkSpeed * 30f);
+					this.GetComponent<CharacterController>().SimpleMove(goVec * walkSpeed * 40f);
 				}
-			}
+//			}
 
 			//random time-based queefing
 			if(queefing == false && doAQueef == true){
-				animator.SetTrigger("queef");
+				animator.SetTrigger("attack");
 				//				player.gameObject.GetComponent<MainCharController>().getKnockedBack();
 				queefing = true;
 				StartCoroutine("waitForAnimToStart");
@@ -92,12 +95,12 @@ public class EnemyController : MonoBehaviour {
 
 	public void takeHit(){
 		gotHit = true;
-		gotHitFlyToPos = new Vector3(transform.position.x + 10f, transform.position.y, transform.position.z);
+		gotHitFlyToPos = new Vector3(transform.position.x + gotHitDistance, transform.position.y, transform.position.z);
 	}
 
 	IEnumerator waitForAnimToStart(){
 		while(true){
-			if(gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("EverySize_Queef_Fast")){
+			if(gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Attack")){
 				StartCoroutine("waitForAnimToEnd");
 				yield break;
 			}
@@ -107,9 +110,17 @@ public class EnemyController : MonoBehaviour {
 	
 	IEnumerator waitForAnimToEnd(){
 		while(true){
-			if(!gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("EverySize_Queef_Fast")){
+
+			//check if player is in attack cone
+			attackCube.attackCubeActive = true;
+
+			if(!gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Attack")){
 				queefing = false;
 //				StartCoroutine("waitForExplosionToEnd");
+
+				//attack over. make player not get knocked back anymore
+				attackCube.attackCubeActive = false;
+
 				yield break;
 			}
 			yield return null;
@@ -117,7 +128,7 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	void shouldWeQueef(){
-		if(Random.Range(0f,1f) < 0.3f) doAQueef = true;
+		if(Random.Range(0f,1f) < 0.4f) doAQueef = true;
 		else doAQueef = false;
 	}
 }

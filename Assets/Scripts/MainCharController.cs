@@ -22,7 +22,7 @@ public class MainCharController : MonoBehaviour {
 		if(gotHit == true){
 			float step = gotHitSpeed * Time.deltaTime;
 			transform.position = Vector3.Lerp(transform.position, gotHitFlyToPos, step);
-			if(transform.position == gotHitFlyToPos) gotHit = false;
+			if((transform.position - gotHitFlyToPos).magnitude < .1f) gotHit = false;
 		}
 	}
 
@@ -67,8 +67,9 @@ public class MainCharController : MonoBehaviour {
 		if(u)
 			zGo = walkSpeed;
 
-
-		controller.SimpleMove(new Vector3(xGo, yGo, zGo));
+		//if we're being knocked back, make player lose control
+		if(!gotHit)
+			controller.SimpleMove(new Vector3(xGo, yGo, zGo));
 	}
 
 	public void performHit(){
@@ -79,6 +80,6 @@ public class MainCharController : MonoBehaviour {
 
 	public void getKnockedBack(){
 		gotHit = true;
-		gotHitFlyToPos = new Vector3(transform.position.x + -10f, transform.position.y, transform.position.z);
+		gotHitFlyToPos = new Vector3(transform.position.x + -20f, transform.position.y, transform.position.z);
 	}
 }
