@@ -32,6 +32,13 @@ public class PlayerController : MonoBehaviour {
 			animator.SetTrigger("attack");
 		}
 
+		if(Input.GetKey (KeyCode.Mouse1)){
+			animator.SetBool("blocking", true);
+		}
+		if(Input.GetKeyUp(KeyCode.Mouse1))
+			animator.SetBool("blocking", false);
+
+
 		u = false;
 		d = false;
 		l = false;
@@ -80,8 +87,11 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void takeHit(){
-		gotHit = true;
-		gotHitFlyToPos = new Vector3(transform.position.x + -20f, transform.position.y, transform.position.z);
+		//if blocking, don't get knocked back
+		if(animator.GetBool("blocking") == false){
+			gotHit = true;
+			gotHitFlyToPos = new Vector3(transform.position.x + -20f, transform.position.y, transform.position.z);
+		}
 	}
 
 }
