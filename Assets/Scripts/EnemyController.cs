@@ -15,7 +15,7 @@ public class EnemyController : MonoBehaviour
 
 	public int health;
 
-	float meleeFrequency = 0.9f;
+	float meleeFrequency = 0.7f;
 	float rangedFrequency = 0.3f;
 
 	float nextToPlayerDistance = 5f;
@@ -33,7 +33,7 @@ public class EnemyController : MonoBehaviour
 		lerpyMovement = true;
 		rangedAttacking = false;
 		InvokeRepeating ("shouldWeRanged", .01f, 1.0f);
-		InvokeRepeating ("shouldWeMelee", .01f, 1.0f);
+		InvokeRepeating ("shouldWeMelee", .01f, .5f);
 		health = 100;
 	}
 
