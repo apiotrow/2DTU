@@ -3,9 +3,11 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 	public ParticleSystem[] hitEnemyParticleSystem;
-
+	
 	float walkSpeed = 20f;
 	float gotHitSpeed = 5f;
+
+	public int health;
 
 	CharacterController controller;
 	Animator animator;
@@ -13,17 +15,27 @@ public class PlayerController : MonoBehaviour {
 	float xGo, yGo, zGo;
 	bool gotHit;
 	Vector3 gotHitFlyToPos;
+	bool readyToTakeDmgAgain;
 
 	void Start () {
 		controller = GetComponent<CharacterController>();
 		animator = GetComponent<Animator>();
+		health = 100;
+		readyToTakeDmgAgain = true;
 	}
 
 	void FixedUpdate(){
+
+		//knockback
 		if(gotHit == true){
 			float step = gotHitSpeed * Time.deltaTime;
 			transform.position = Vector3.Lerp(transform.position, gotHitFlyToPos, step);
-			if((transform.position - gotHitFlyToPos).magnitude < 2f) gotHit = false;
+
+			//threshhold keeps player from slowing down too much near end of knockback
+			if((transform.position - gotHitFlyToPos).magnitude < 2f){
+				gotHit = false;
+				readyToTakeDmgAgain = true;
+			}
 		}
 	}
 
@@ -87,11 +99,16 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void takeHit(){
+
+		if(readyToTakeDmgAgain == true){
+			health -= 5;
+			readyToTakeDmgAgain = false;
+		}
+
 		//if blocking, don't get knocked back
 		if(animator.GetBool("blocking") == false){
 			gotHit = true;
 			gotHitFlyToPos = new Vector3(transform.position.x + -20f, transform.position.y, transform.position.z);
 		}
 	}
-
 }

@@ -49,6 +49,7 @@
      <Compile Include="Assets\FT_FreeSample\Script\Button.cs" />
      <Compile Include="Assets\FX\Fx Explosion Pack\Script\DestroyEffect.cs" />
      <Compile Include="Assets\FX\Fx Explosion Pack\Script\csLightControl.cs" />
+     <Compile Include="Assets\GameUIController.cs" />
      <Compile Include="Assets\Scripts\Ahmed_ThrowClock.cs" />
      <Compile Include="Assets\Scripts\CharController.cs" />
      <Compile Include="Assets\Scripts\DragRigidBodyCSharp.cs" />

@@ -3,7 +3,6 @@ using System.Collections;
 
 public class EnemyController : MonoBehaviour
 {
-
 	public bool gettingKnockedBack;
 	public Transform player;
 	public EnemyRangedCollider enemyRangedCollider;
@@ -14,8 +13,12 @@ public class EnemyController : MonoBehaviour
 	float gotHitDistance = 10f;
 	float walkSpeed = 40f;
 
-	float meleeFrequency = 0.75f;
-	float rangedFrequency = 0.1f;
+	public int health;
+
+	float meleeFrequency = 0.9f;
+	float rangedFrequency = 0.2f;
+
+	float nextToPlayerDistance = 5f;
 
 	Vector3 gotHitFlyToPos;
 	bool lerpyMovement;
@@ -31,6 +34,7 @@ public class EnemyController : MonoBehaviour
 		rangedAttacking = false;
 		InvokeRepeating ("shouldWeRanged", .01f, 1.0f);
 		InvokeRepeating ("shouldWeMelee", .01f, 1.0f);
+		health = 100;
 	}
 
 	void lerpToPlayer (Vector3 toPos)
@@ -71,7 +75,7 @@ public class EnemyController : MonoBehaviour
 	{
 		//setup goto location
 		Vector3 inFrontOfPlayerPosition = transform.position;
-		inFrontOfPlayerPosition.x = player.position.x + 10f;
+		inFrontOfPlayerPosition.x = player.position.x + nextToPlayerDistance;
 		inFrontOfPlayerPosition.z = player.position.z;
 			
 		if (lerpyMovement) {
@@ -109,6 +113,7 @@ public class EnemyController : MonoBehaviour
 
 	public void takeHit ()
 	{
+		health -= 5;
 		gettingKnockedBack = true;
 		gotHitFlyToPos = new Vector3 (transform.position.x + gotHitDistance, transform.position.y, transform.position.z);
 	}
