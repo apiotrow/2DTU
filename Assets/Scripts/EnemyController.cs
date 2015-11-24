@@ -16,7 +16,7 @@ public class EnemyController : MonoBehaviour
 	public int health;
 
 	float meleeFrequency = 0.9f;
-	float rangedFrequency = 0.2f;
+	float rangedFrequency = 0.3f;
 
 	float nextToPlayerDistance = 5f;
 
