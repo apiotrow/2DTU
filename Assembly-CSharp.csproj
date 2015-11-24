@@ -45,19 +45,20 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\AttackCubeEnter.cs" />
-     <Compile Include="Assets\EnemyController.cs" />
-     <Compile Include="Assets\EnemyWeaponCollide.cs" />
+     <Compile Include="Assets\CameraFocus.cs" />
      <Compile Include="Assets\FT_FreeSample\Script\Button.cs" />
      <Compile Include="Assets\FX\Fx Explosion Pack\Script\DestroyEffect.cs" />
      <Compile Include="Assets\FX\Fx Explosion Pack\Script\csLightControl.cs" />
      <Compile Include="Assets\Scripts\Ahmed_ThrowClock.cs" />
      <Compile Include="Assets\Scripts\CharController.cs" />
      <Compile Include="Assets\Scripts\DragRigidBodyCSharp.cs" />
+     <Compile Include="Assets\Scripts\EnemyController.cs" />
+     <Compile Include="Assets\Scripts\EnemyMeleeCollider.cs" />
+     <Compile Include="Assets\Scripts\EnemyRangedCollider.cs" />
      <Compile Include="Assets\Scripts\FaceCamera.cs" />
-     <Compile Include="Assets\Scripts\MainCharController.cs" />
+     <Compile Include="Assets\Scripts\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\PlayerMeleeCollider.cs" />
      <Compile Include="Assets\Scripts\SmoothFollow.cs" />
-     <Compile Include="Assets\WeaponCollide.cs" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />
