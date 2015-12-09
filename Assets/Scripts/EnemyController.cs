@@ -15,8 +15,8 @@ public class EnemyController : MonoBehaviour
 
 	public int health;
 
-	float meleeFrequency = 0.7f;
-	float rangedFrequency = 0.3f;
+	float meleeFrequency = 0.0f;
+	float rangedFrequency = 0.0f;
 
 	float nextToPlayerDistance = 5f;
 
@@ -29,12 +29,14 @@ public class EnemyController : MonoBehaviour
 	
 	void Start ()
 	{
+
 		animator = this.gameObject.GetComponent<Animator> ();
-		lerpyMovement = true;
+		lerpyMovement = false;
 		rangedAttacking = false;
 		InvokeRepeating ("shouldWeRanged", .01f, 1.0f);
 		InvokeRepeating ("shouldWeMelee", .01f, .5f);
 		health = 100;
+
 	}
 
 	void lerpToPlayer (Vector3 toPos)
@@ -67,7 +69,7 @@ public class EnemyController : MonoBehaviour
 		if (zGo == 0 && xGo == 0) {
 			//don't move if we're at destination
 		} else {
-			this.GetComponent<CharacterController> ().SimpleMove (goVec * walkSpeed * 40f);
+			this.GetComponent<CharacterController> ().SimpleMove (goVec * walkSpeed * 10f);
 		}
 	}
 
@@ -85,7 +87,7 @@ public class EnemyController : MonoBehaviour
 		}
 	}
 
-	void FixedUpdate ()
+	void Update ()
 	{
 		//if not being knocked back, let us move
 		if (!gettingKnockedBack) {
@@ -95,7 +97,7 @@ public class EnemyController : MonoBehaviour
 				moveEnemyToPlayer ();
 			}
 
-			//if not attacking
+			//if not ranged attacking and want to do a ranged attack
 			if (!rangedAttacking && wantToDoARanged) {
 				animator.SetTrigger ("ranged");
 				rangedAttacking = true;
@@ -111,11 +113,13 @@ public class EnemyController : MonoBehaviour
 		}
 	}
 
-	public void takeHit ()
+	public void takeHit (float dist)
 	{
 		health -= 5;
 		gettingKnockedBack = true;
-		gotHitFlyToPos = new Vector3 (transform.position.x + gotHitDistance, transform.position.y, transform.position.z);
+//		gotHitFlyToPos = new Vector3 (transform.position.x + gotHitDistance, transform.position.y, transform.position.z);
+		gotHitFlyToPos = new Vector3 (transform.position.x + dist, transform.position.y, transform.position.z);
+
 	}
 
 	//waits for animation to start

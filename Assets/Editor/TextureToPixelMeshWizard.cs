@@ -180,9 +180,10 @@ public class TextureToPixelMeshWizard : ScriptableWizard
 			
 		}
 
-
+		//convert to arrays so we can work with indexes
 		Vector3[] tempVerts = verts.ToArray (typeof(Vector3)) as Vector3[];
 		int[] tempTriangles = triangles.ToArray (typeof(int)) as int[]; 
+		Color[] tempColors = colors.ToArray (typeof(Color)) as Color[]; 
 		hiddenTriangles.Clear();
 		hiddenTrianglesAverage.Clear();
 
@@ -202,9 +203,27 @@ public class TextureToPixelMeshWizard : ScriptableWizard
 				hiddenTrianglesAverage.Add(faceAvg);
 			}
 		}
-		Debug.Log(hiddenTriangleTester.Count + " " + hiddenTrianglesAverage.Count);
+//		Debug.Log(hiddenTriangleTester.Count + " " + hiddenTrianglesAverage.Count);
 
-		ArrayList newTris = new ArrayList();
+
+		List<int> finalTris = new List<int>();
+
+//		List<Color> colorList = new List<Color>();
+//		for(int y = 0; y < tempColors.Length; y++){
+//			colorList.Add(tempColors[y]);
+//		}
+//		List<Vector3> vertList = new List<Vector3>();
+//		for(int y = 0; y < tempVerts.Length; y++){
+//			vertList.Add(tempVerts[y]);
+//		}
+
+
+//		HashSet<int> trisNumUsed = new HashSet<int>();
+		int triIter = -1;
+
+		//all verts, with a list of tris corresponding to them
+		Dictionary<Vector3, List<int>> totalDic = new Dictionary<Vector3, List<int>>();
+
 		for(int h = 0; h < tempTriangles.Length; h += 3){
 			Vector3[] tri = new Vector3[3]{
 				tempVerts [tempTriangles[h]], 
@@ -215,18 +234,103 @@ public class TextureToPixelMeshWizard : ScriptableWizard
 
 			//if signature isn't in hidden triangles hashset, we're free to add it for rendering
 			if(!hiddenTrianglesAverage.Contains(faceAvg)){
-				newTris.Add(tempTriangles[h]);
-				newTris.Add(tempTriangles[h + 1]);
-				newTris.Add(tempTriangles[h + 2]);
+				int triNumOne = tempTriangles[h];
+				int triNumTwo = tempTriangles[h + 1];
+				int triNumThree = tempTriangles[h + 2];
+				finalTris.Add(triNumOne);
+				finalTris.Add(triNumTwo);
+				finalTris.Add(triNumThree);
+
+//				if(!trisNumUsed.Contains(triNumOne))
+//					trisNumUsed.Add(triNumOne);
+//				if(!trisNumUsed.Contains(triNumTwo))
+//					trisNumUsed.Add(triNumTwo);
+//				if(!trisNumUsed.Contains(triNumThree))
+//					trisNumUsed.Add(triNumThree);
+
+				//for h, h + 1, and h + 2
+				for(int i = 0; i < 3; i++){
+					if(!totalDic.ContainsKey(tempVerts[tempTriangles[h + i]])){
+						List<int> newIntList = new List<int>();
+						newIntList.Add(tempTriangles[h + i]);
+						totalDic.Add(tempVerts[tempTriangles[h + i]], newIntList);
+					}else{
+						totalDic[tempVerts[tempTriangles[h + i]]].Add(tempTriangles[h + i]);
+					}
+				}
+
 			}
 		}
 
+
+
+		List<Vector3> finalVerts = new List<Vector3>();
+		List<Color> finalColors = new List<Color>();
+		Dictionary<Vector3, Color> colorDic = new Dictionary<Vector3, Color>();
+//		for(int g = 0; g < vertList.Count; g++){
+//			if(!colorDic.ContainsKey(vertList[g]))
+//				colorDic.Add(vertList[g], colorList[g]);
+//		}
+
+		//for filling up the finalColors list with the correct color for
+		//that vertex
+		for(int g = 0; g < tempVerts.Length; g++){
+			if(!colorDic.ContainsKey(tempVerts[g]))
+				colorDic.Add(tempVerts[g], tempColors[g]);
+		}
+
+
+
+		int finalVertsIndexes = 0;
+
+		//for all vertices in this mesh
+		foreach(KeyValuePair<Vector3, List<int>> entry in totalDic)
+		{
+			finalVerts.Add(entry.Key);
+			finalColors.Add(colorDic[entry.Key]);
+
+			for(int p = 0; p < finalTris.Count; p++){
+				if(entry.Value.Contains(finalTris[p])){
+					int oldTriNum = finalTris[p];
+					finalTris[p] = finalVertsIndexes;
+
+//					Debug.Log(oldTriNum + " => " + finalVertsIndexes);
+				}
+			}
+			finalVertsIndexes += 1;
+		}
+		
+
+
+//		HashSet<int> trisNumNotUsed = new HashSet<int>();
+//		List<int> notUsedList = new List<int>();
+//		for(int i = 0; i < tempTriangles.Length; i++){
+//			//if the triangle number was cut from the batch due to sharing a face
+//			if(!trisNumUsed.Contains(tempTriangles[i]))
+////				Debug.Log(tempTriangles[i]);
+//
+//				//put it in the notUsed data structure
+//				if(!trisNumNotUsed.Contains(tempTriangles[i])){
+//					trisNumNotUsed.Add(tempTriangles[i]);
+//					notUsedList.Add(tempTriangles[i]);
+//				}
+//		}
+//		foreach(var c in notUsedList)
+//			Debug.Log(c);
+
+		Debug.Log("FINAL VERT COUNT: " + finalVerts.Count);
+//		Debug.Log(triangles.Count + " " + finalTris.Count);
+//		Debug.Log(verts.Count + " " + newVerts.Count);
+
 		
 		Mesh theMesh = new Mesh ();
-		Vector3[] theVerts = verts.ToArray (typeof(Vector3)) as Vector3[];
-		Color[] theColors = colors.ToArray (typeof(Color)) as Color[];
+//		Vector3[] theVerts = verts.ToArray (typeof(Vector3)) as Vector3[];
+		Vector3[] theVerts = finalVerts.ToArray();
+//		Color[] theColors = colors.ToArray (typeof(Color)) as Color[];
+		Color[] theColors = finalColors.ToArray();
 //		int[] theTriangles = triangles.ToArray (typeof(int)) as int[]; 
-		int[] theTriangles = newTris.ToArray (typeof(int)) as int[]; 
+//		int[] theTriangles = newTris.ToArray (typeof(int)) as int[]; 
+		int[] theTriangles = finalTris.ToArray(); 
 
 
 

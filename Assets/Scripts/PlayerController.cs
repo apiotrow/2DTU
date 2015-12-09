@@ -8,9 +8,10 @@ public class PlayerController : MonoBehaviour {
 	float gotHitSpeed = 5f;
 
 	public int health;
+	public float privPower = 0f;
 
 	CharacterController controller;
-	Animator animator;
+	public Animator animator;
 	bool u, d, l, r;
 	float xGo, yGo, zGo;
 	bool gotHit;
@@ -24,7 +25,8 @@ public class PlayerController : MonoBehaviour {
 		readyToTakeDmgAgain = true;
 	}
 
-	void FixedUpdate(){
+	void Update(){
+	
 
 		//knockback
 		if(gotHit == true){
@@ -37,20 +39,19 @@ public class PlayerController : MonoBehaviour {
 				readyToTakeDmgAgain = true;
 			}
 		}
-	}
 
-	void Update () {
+
 		if (Input.GetKeyDown (KeyCode.Mouse0) || Input.GetKeyDown (KeyCode.Space)) {
 			animator.SetTrigger("attack");
 		}
-
+		
 		if(Input.GetKey (KeyCode.Mouse1)){
 			animator.SetBool("blocking", true);
 		}
 		if(Input.GetKeyUp(KeyCode.Mouse1))
 			animator.SetBool("blocking", false);
-
-
+		
+		
 		u = false;
 		d = false;
 		l = false;
@@ -58,9 +59,9 @@ public class PlayerController : MonoBehaviour {
 		xGo = 0f;
 		yGo = 0f;
 		zGo = 0f;
-
+		
 		animator.SetBool("walking", false);
-
+		
 		if (Input.GetKey (KeyCode.A)) {
 			l = true;
 			animator.SetBool("walking", true);
@@ -77,7 +78,7 @@ public class PlayerController : MonoBehaviour {
 			r = true;
 			animator.SetBool("walking", true);
 		}
-
+		
 		if(l)
 			xGo = -walkSpeed;
 		if(d)
@@ -86,19 +87,25 @@ public class PlayerController : MonoBehaviour {
 			xGo = walkSpeed;
 		if(u)
 			zGo = walkSpeed;
-
+		
 		//if we're being knocked back, make player lose control
 		if(!gotHit)
 			controller.SimpleMove(new Vector3(xGo, yGo, zGo));
+
 	}
 
+
 	public void performHit(){
+		privPower += 1;
+
 		for(int i = 0; i < hitEnemyParticleSystem.Length; i++){
 			hitEnemyParticleSystem[i].Play ();
 		}
 	}
 
 	public void takeHit(){
+		if(privPower > 0)
+			privPower -= 1;
 
 		if(readyToTakeDmgAgain == true){
 			health -= 5;
