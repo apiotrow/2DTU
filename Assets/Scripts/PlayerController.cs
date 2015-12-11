@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 	public ParticleSystem[] hitEnemyParticleSystem;
 	
-	float walkSpeed = 20f;
+	float walkSpeed = 30f;
 	float gotHitSpeed = 5f;
 
 	public int health;
@@ -88,8 +88,9 @@ public class PlayerController : MonoBehaviour {
 		if(u)
 			zGo = walkSpeed;
 		
-		//if we're being knocked back, make player lose control
-		if(!gotHit)
+		//if we're being knocked back, make player lose control.
+		//if we're blocking, make player not be able to move
+		if(!gotHit /*&& !animator.GetBool("blocking")*/)
 			controller.SimpleMove(new Vector3(xGo, yGo, zGo));
 
 	}

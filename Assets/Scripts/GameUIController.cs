@@ -10,8 +10,8 @@ public class GameUIController : MonoBehaviour {
 	EnemyController ec;
 
 	void Start () {
-//		playerHealthSlider = GameObject.Find("PlayerHealthSlider").GetComponent<Slider>();
-//		enemyHealthSlider = GameObject.Find("EnemyHealthSlider").GetComponent<Slider>();
+		playerHealthSlider = GameObject.Find("PlayerHealthSlider").GetComponent<Slider>();
+		enemyHealthSlider = GameObject.Find("EnemyHealthSlider").GetComponent<Slider>();
 		privPower = GameObject.Find("PrivPower").GetComponent<Text>();
 
 		pc = GameObject.Find("Sam").GetComponent<PlayerController>();
@@ -20,8 +20,8 @@ public class GameUIController : MonoBehaviour {
 	
 
 	void Update () {
-//		playerHealthSlider.value = (float)pc.health / 100f;
-//		enemyHealthSlider.value = (float)ec.health / 100f;
+		playerHealthSlider.value = (float)pc.health / 100f;
+		enemyHealthSlider.value = (float)ec.health / 100f;
 		privPower.text = pc.privPower.ToString();
 	}
 }

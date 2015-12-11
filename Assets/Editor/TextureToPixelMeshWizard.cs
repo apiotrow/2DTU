@@ -284,21 +284,21 @@ public class TextureToPixelMeshWizard : ScriptableWizard
 		int finalVertsIndexes = 0;
 
 		//for all vertices in this mesh
-		foreach(KeyValuePair<Vector3, List<int>> entry in totalDic)
-		{
-			finalVerts.Add(entry.Key);
-			finalColors.Add(colorDic[entry.Key]);
-
-			for(int p = 0; p < finalTris.Count; p++){
-				if(entry.Value.Contains(finalTris[p])){
-					int oldTriNum = finalTris[p];
-					finalTris[p] = finalVertsIndexes;
-
-//					Debug.Log(oldTriNum + " => " + finalVertsIndexes);
-				}
-			}
-			finalVertsIndexes += 1;
-		}
+//		foreach(KeyValuePair<Vector3, List<int>> entry in totalDic)
+//		{
+//			finalVerts.Add(entry.Key);
+//			finalColors.Add(colorDic[entry.Key]);
+//
+//			for(int p = 0; p < finalTris.Count; p++){
+//				if(entry.Value.Contains(finalTris[p])){
+//					int oldTriNum = finalTris[p];
+//					finalTris[p] = finalVertsIndexes;
+//
+////					Debug.Log(oldTriNum + " => " + finalVertsIndexes);
+//				}
+//			}
+//			finalVertsIndexes += 1;
+//		}
 		
 
 
@@ -324,10 +324,10 @@ public class TextureToPixelMeshWizard : ScriptableWizard
 
 		
 		Mesh theMesh = new Mesh ();
-//		Vector3[] theVerts = verts.ToArray (typeof(Vector3)) as Vector3[];
-		Vector3[] theVerts = finalVerts.ToArray();
-//		Color[] theColors = colors.ToArray (typeof(Color)) as Color[];
-		Color[] theColors = finalColors.ToArray();
+		Vector3[] theVerts = verts.ToArray (typeof(Vector3)) as Vector3[];
+//		Vector3[] theVerts = finalVerts.ToArray();
+		Color[] theColors = colors.ToArray (typeof(Color)) as Color[];
+//		Color[] theColors = finalColors.ToArray();
 //		int[] theTriangles = triangles.ToArray (typeof(int)) as int[]; 
 //		int[] theTriangles = newTris.ToArray (typeof(int)) as int[]; 
 		int[] theTriangles = finalTris.ToArray(); 
