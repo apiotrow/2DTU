@@ -8,7 +8,7 @@ public class EnemyRangedCollider : MonoBehaviour {
 	{
 		if(colliderEnabled){
 			if(o.gameObject.GetComponent<PlayerController>() != null){
-				o.gameObject.GetComponent<PlayerController>().takeHit();
+				o.gameObject.GetComponent<PlayerController>().takeHit(-50f);
 			}
 		}
 	}

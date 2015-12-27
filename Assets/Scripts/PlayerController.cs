@@ -4,19 +4,21 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 	public ParticleSystem[] hitEnemyParticleSystem;
 	
-	float walkSpeed = 30f;
+	float walkSpeed = 50f;
 	float gotHitSpeed = 5f;
 
 	public int health;
 	public float privPower = 0f;
 
 	CharacterController controller;
-	public Animator animator;
+	Animator animator;
 	bool u, d, l, r;
 	float xGo, yGo, zGo;
 	bool gotHit;
 	Vector3 gotHitFlyToPos;
 	bool readyToTakeDmgAgain;
+
+	bool allowAttack = true; //for when we're in middle of attack and don't want to let another one happen
 
 	void Start () {
 		controller = GetComponent<CharacterController>();
@@ -40,16 +42,27 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 
+		if(allowAttack){
+			if (Input.GetKeyDown (KeyCode.LeftArrow)) {
+				animator.SetTrigger("melee");
+				allowAttack = false;
+				StartCoroutine ("waitForAnimToStart", "Sam_Melee");
+			}
 
-		if (Input.GetKeyDown (KeyCode.Mouse0) || Input.GetKeyDown (KeyCode.Space)) {
-			animator.SetTrigger("attack");
+			if (Input.GetKeyDown (KeyCode.DownArrow)) {
+				animator.SetTrigger("whirlwind");
+				allowAttack = false;
+				StartCoroutine ("waitForAnimToStart", "Sam_Whirlwind");
+			}
 		}
-		
+
+
 		if(Input.GetKey (KeyCode.Mouse1)){
 			animator.SetBool("blocking", true);
 		}
 		if(Input.GetKeyUp(KeyCode.Mouse1))
 			animator.SetBool("blocking", false);
+
 		
 		
 		u = false;
@@ -104,9 +117,9 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	public void takeHit(){
-		if(privPower > 0)
-			privPower -= 1;
+	public void takeHit(float dist){
+//		if(privPower > 0)
+//			privPower -= 1;
 
 		if(readyToTakeDmgAgain == true){
 			health -= 5;
@@ -116,7 +129,33 @@ public class PlayerController : MonoBehaviour {
 		//if blocking, don't get knocked back
 		if(animator.GetBool("blocking") == false){
 			gotHit = true;
-			gotHitFlyToPos = new Vector3(transform.position.x + -20f, transform.position.y, transform.position.z);
+			gotHitFlyToPos = new Vector3(transform.position.x + dist, transform.position.y, transform.position.z);
 		}
 	}
+
+	#region animationWaiter
+	IEnumerator waitForAnimToStart (string attackName)
+	{
+		while (true) {
+			if (animator.GetCurrentAnimatorStateInfo (0).IsName (attackName)) {
+				StartCoroutine ("waitForAnimToEnd", attackName);
+				print (allowAttack);
+				yield break;
+			}
+			yield return null;
+		}
+	}
+	
+	IEnumerator waitForAnimToEnd (string attackName)
+	{
+		
+		while (true) {
+			if (!animator.GetCurrentAnimatorStateInfo (0).IsName (attackName)) {
+				allowAttack = true;
+				yield break;
+			}
+			yield return null;
+		}
+	}
+	#endregion animationWaiter
 }

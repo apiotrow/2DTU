@@ -1,15 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Editor/TextureToPixelMeshWizard.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="../garbagedump/garbagedump/Assets/MDESFcc.cs">
     <Files>
-      <File FileName="Assets/Editor/TextureToPixelMeshWizard.cs" Line="333" Column="45" />
-      <File FileName="Assets/Scripts/PlayerController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/EnemyController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/PlayerMeleeCollider.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GameUIController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/EnemyMeleeCollider.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/CharController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/CameraFocus.cs" Line="35" Column="76" />
+      <File FileName="../garbagedump/garbagedump/Assets/MDESFcc.cs" Line="23" Column="3" />
+      <File FileName="Assets/Scripts/EnemyController.cs" Line="104" Column="40" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

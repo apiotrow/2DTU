@@ -33,7 +33,7 @@ public class CameraFocus : MonoBehaviour {
 		avgZ /= thingsToFocus.Length;
 		Vector3 newCameraPos = new Vector3(avgX, transform.position.y, transform.position.z);
 //		Vector3 newCameraPos = new Vector3(avgX, transform.position.y, avgZ - 50f);
-		transform.position = Vector3.Lerp(transform.position, newCameraPos, Time.deltaTime);
+		transform.position = Vector3.Lerp(transform.position, newCameraPos, Time.deltaTime * 3f);
 	}
 
 	void updateFog(){
