@@ -19,13 +19,16 @@ public class PlayerController : MonoBehaviour {
 	bool readyToTakeDmgAgain;
 
 	bool allowAttack = true; //for when we're in middle of attack and don't want to let another one happen
+	public float hitPower = 5f; //holds knockback power for melee collider
 
 	void Start () {
 		controller = GetComponent<CharacterController>();
 		animator = GetComponent<Animator>();
 		health = 100;
 		readyToTakeDmgAgain = true;
+
 	}
+
 
 	void Update(){
 	
@@ -43,14 +46,16 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if(allowAttack){
-			if (Input.GetKeyDown (KeyCode.LeftArrow)) {
+			if (Input.GetKeyDown (KeyCode.Alpha1)) {
 				animator.SetTrigger("melee");
+				hitPower = 5f;
 				allowAttack = false;
 				StartCoroutine ("waitForAnimToStart", "Sam_Melee");
 			}
 
-			if (Input.GetKeyDown (KeyCode.DownArrow)) {
+			if (Input.GetKeyDown (KeyCode.Alpha2)) {
 				animator.SetTrigger("whirlwind");
+				hitPower = 20f;
 				allowAttack = false;
 				StartCoroutine ("waitForAnimToStart", "Sam_Whirlwind");
 			}
@@ -75,19 +80,19 @@ public class PlayerController : MonoBehaviour {
 		
 		animator.SetBool("walking", false);
 		
-		if (Input.GetKey (KeyCode.A)) {
+		if (Input.GetKey (KeyCode.LeftArrow)) {
 			l = true;
 			animator.SetBool("walking", true);
 		}
-		if (Input.GetKey (KeyCode.S)) {
+		if (Input.GetKey (KeyCode.DownArrow)) {
 			d = true;
 			animator.SetBool("walking", true);
 		}
-		if (Input.GetKey (KeyCode.W)) {
+		if (Input.GetKey (KeyCode.UpArrow)) {
 			u = true;
 			animator.SetBool("walking", true);
 		}
-		if (Input.GetKey (KeyCode.D)) {
+		if (Input.GetKey (KeyCode.RightArrow)) {
 			r = true;
 			animator.SetBool("walking", true);
 		}

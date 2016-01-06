@@ -11,7 +11,8 @@ public class EnemyController : MonoBehaviour
 
 	float gotHitSpeed = 10f;
 	float gotHitDistance = 10f;
-	float walkSpeed = 40f;
+	float lerpWalkSpeed = 2f;
+	float nonLerpWalkSpeed = 100f;
 
 	public int health;
 
@@ -31,7 +32,7 @@ public class EnemyController : MonoBehaviour
 	{
 
 		animator = this.gameObject.GetComponent<Animator> ();
-		lerpyMovement = true;
+		lerpyMovement = false;
 		rangedAttacking = false;
 		InvokeRepeating ("shouldWeRanged", .01f, 1.0f);
 		InvokeRepeating ("shouldWeMelee", .01f, 2f);
@@ -43,7 +44,7 @@ public class EnemyController : MonoBehaviour
 	{
 		Vector3 moveVec = toPos - transform.position;
 		animator.SetBool ("walking", true);
-		this.GetComponent<CharacterController> ().SimpleMove (moveVec * 2f);
+		this.GetComponent<CharacterController> ().SimpleMove (moveVec * lerpWalkSpeed);
 	}
 
 	void linearMoveToPlayer (Vector3 toPos)
@@ -69,7 +70,7 @@ public class EnemyController : MonoBehaviour
 		if (zGo == 0 && xGo == 0) {
 			//don't move if we're at destination
 		} else {
-			this.GetComponent<CharacterController> ().SimpleMove (goVec * walkSpeed * 10f);
+			this.GetComponent<CharacterController> ().SimpleMove (goVec * nonLerpWalkSpeed * 10f);
 		}
 	}
 

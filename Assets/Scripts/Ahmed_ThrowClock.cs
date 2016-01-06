@@ -9,6 +9,12 @@ public class Ahmed_ThrowClock : MonoBehaviour {
 	
 	void Start () {
 		animator = GetComponent<Animator>();
+		InvokeRepeating("AhmedThrow", 1f, 4f);
+	}
+
+	void AhmedThrow(){
+		animator.SetTrigger("throwClock");
+		StartCoroutine("waitForThrowToStart");
 	}
 
 	void Update () {
