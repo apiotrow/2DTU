@@ -9,38 +9,31 @@
 #endif
 
 
-// System.Object
-struct Object_t;
-// System.String
-struct String_t;
-// System.Type
-struct Type_t;
-// System.Exception
-struct Exception_t1_33;
-// System.Text.StringBuilder
-struct StringBuilder_t1_144;
-// System.MulticastDelegate
-struct MulticastDelegate_t1_21;
-// System.Reflection.MethodBase
-struct MethodBase_t1_194;
+struct t1_1;
+struct t1_18;
+struct t1_37;
+struct t1_43;
+struct t1_158;
+struct t1_27;
+struct t1_208;
 
-#include "mscorlib_System_Array.h"
-#include "mscorlib_System_RuntimeTypeHandle.h"
-#include "mscorlib_System_RuntimeFieldHandle.h"
-#include "mscorlib_System_RuntimeArgumentHandle.h"
-#include "mscorlib_System_RuntimeMethodHandle.h"
+#include "t1_33.h"
+#include "t1_40.h"
+#include "t1_46.h"
+#include "t1_66.h"
+#include "t1_298.h"
 
 #pragma once
-typedef Object_t Il2CppCodeGenObject;
-typedef Array_t Il2CppCodeGenArray;
-typedef String_t Il2CppCodeGenString;
-typedef Type_t Il2CppCodeGenType;
-typedef Exception_t1_33 Il2CppCodeGenException;
-typedef Exception_t1_33 Il2CppCodeGenException;
-typedef RuntimeTypeHandle_t1_30 Il2CppCodeGenRuntimeTypeHandle;
-typedef RuntimeFieldHandle_t1_36 Il2CppCodeGenRuntimeFieldHandle;
-typedef RuntimeArgumentHandle_t1_53 Il2CppCodeGenRuntimeArgumentHandle;
-typedef RuntimeMethodHandle_t1_280 Il2CppCodeGenRuntimeMethodHandle;
-typedef StringBuilder_t1_144 Il2CppCodeGenStringBuilder;
-typedef MulticastDelegate_t1_21 Il2CppCodeGenMulticastDelegate;
-typedef MethodBase_t1_194 Il2CppCodeGenMethodBase;
+typedef t1_1 Il2CppCodeGenObject;
+typedef t1_33 Il2CppCodeGenArray;
+typedef t1_18 Il2CppCodeGenString;
+typedef t1_37 Il2CppCodeGenType;
+typedef t1_43 Il2CppCodeGenException;
+typedef t1_43 Il2CppCodeGenException;
+typedef t1_40 Il2CppCodeGenRuntimeTypeHandle;
+typedef t1_46 Il2CppCodeGenRuntimeFieldHandle;
+typedef t1_66 Il2CppCodeGenRuntimeArgumentHandle;
+typedef t1_298 Il2CppCodeGenRuntimeMethodHandle;
+typedef t1_158 Il2CppCodeGenStringBuilder;
+typedef t1_27 Il2CppCodeGenMulticastDelegate;
+typedef t1_208 Il2CppCodeGenMethodBase;

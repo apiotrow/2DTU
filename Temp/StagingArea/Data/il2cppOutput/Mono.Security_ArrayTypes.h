@@ -10,12 +10,8 @@
 
 
 
-#include "mscorlib_System_Array.h"
+#include "t1_33.h"
 
 #pragma once
-// Mono.Math.BigInteger[]
-// Mono.Math.BigInteger[]
-struct BigIntegerU5BU5D_t2_122  : public Array_t { };
-// Mono.Security.Protocol.Tls.Handshake.ClientCertificateType[]
-// Mono.Security.Protocol.Tls.Handshake.ClientCertificateType[]
-struct ClientCertificateTypeU5BU5D_t2_97  : public Array_t { };
+struct t2_122  : public t1_33 { };
+struct t2_98  : public t1_33 { };

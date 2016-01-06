@@ -10,12 +10,8 @@
 
 
 
-#include "mscorlib_System_Array.h"
+#include "t1_33.h"
 
 #pragma once
-// Boo.Lang.Runtime.DynamicDispatching.DispatcherKey[]
-// Boo.Lang.Runtime.DynamicDispatching.DispatcherKey[]
-struct DispatcherKeyU5BU5D_t5_18  : public Array_t { };
-// Boo.Lang.Runtime.DynamicDispatching.Dispatcher[]
-// Boo.Lang.Runtime.DynamicDispatching.Dispatcher[]
-struct DispatcherU5BU5D_t5_19  : public Array_t { };
+struct t5_18  : public t1_33 { };
+struct t5_19  : public t1_33 { };
